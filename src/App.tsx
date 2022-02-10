@@ -93,7 +93,7 @@ const App: FC = () => {
     fetch(
       `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stock}&interval=5min&outputsize=full&apikey=HAG13KIF0X10H6C0`
     ).then((res) => res.json()
-    ).then((data) => {
+    ).then((data: StockData) => {
       if (data['Meta Data']) {
         let name = data['Meta Data']['2. Symbol']
         let obj = data['Time Series (5min)']
