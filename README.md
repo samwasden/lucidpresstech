@@ -68,3 +68,7 @@ There is not a responsive design. Don't worry about making it responsive, but yo
 Feel free to install any packages you feel are necessary to complete the work, but please provide reasons why you included them, what the tradeoffs are, and what alternatives exist in the comments.
 
 Good luck!
+
+## Notes
+
+
