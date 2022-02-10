@@ -12,7 +12,7 @@ h2 {
 .main {
   width: 100vw;
   height: 100vh;
-  background: url('./media/city.jpg');
+  background: linear-gradient(0deg, rgba(255, 108, 108, 0.253) 0%, rgba(255,180,180,0.2091211484593838) 15%, rgba(244,247,249,0) 100%), url('./media/city.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -38,6 +38,9 @@ h2 {
 .current_stock {
   height: 38%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .date_display {
@@ -53,18 +56,45 @@ h2 {
   padding: 26px;
 }
 
-.date_numeric {
-  background: linear-gradient(20deg, #b5637b, #cc9da3);
-  border: 6px solid #a4656e;
+.stock_box {
+  width: auto;
+  padding: 26px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.bordered_box {
   border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-shadow: 0 0 3px white;
   padding: 6px 16px;
+  margin-left: 10px;
 }
 
-.date_alphabetic {
+.header_box {
+  background: linear-gradient(20deg, #b5637b, #cc9da3);
+  border: 6px solid #a4656e;
+}
+
+.price_down_true {
+  background: linear-gradient(20deg, #b5637b, #cc9da3);
+  border: 6px solid #a4656e;
+}
+
+.price_down_false {
+  background: linear-gradient(20deg, #777d70, #a6aba0);
+  border: 6px solid #626e5f;
+}
+
+.weather_display {
+  display: flex;
+  align-items: center;
+}
+
+.header_alphabetic {
   margin-left: 10px;
   color: rgba(66, 66, 66, 0.685);
 }
