@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import './Clock.css'
 
+// This was a very fun challenge to attempt.
+
 type Props = {
     timeArray: String[];
 }
@@ -10,6 +12,8 @@ interface NumArr {
 }
 
 const Clock: FC <Props> = ({timeArray}) => {
+
+    // Created simple 2 dimensional arrays to populate the clock display. At first I used CSS Grid and table elements but this limited the styling i could add. I chose Flexbox so i could still skew the rows and columns
 
     let digits: NumArr = {
         '0': [
@@ -141,6 +145,8 @@ const Clock: FC <Props> = ({timeArray}) => {
             [1, 0, 0, 0, 1],
             [1, 0, 0, 0, 1]],
     }
+
+    // Likely it would be cleaner to break down each mapping into it's own function but I found it easier to visualize the display by writing it all in the same block.
 
 
   return (

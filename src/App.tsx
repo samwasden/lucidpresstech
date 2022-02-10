@@ -1,8 +1,14 @@
 import { FC, useEffect, useState } from "react";
+
+// Imported Icons from React Icons
+
 import { BsCloudHaze, BsCloudRain } from "react-icons/bs";
 import { TiWeatherCloudy, TiWeatherPartlySunny, TiWeatherSnow, TiWeatherSunny } from "react-icons/ti"
 
 import "./App.css";
+
+// Clock and Ticker components used to create elements
+
 import Clock from "./Clock";
 import Ticker from "./Ticker";
 
@@ -28,11 +34,15 @@ interface StockData {
   };
 }
 
+// Modified StockState to allow for easier access from JSX
+
 interface StockState {
   symbol: string;
   price: number;
   hasPriceRDropped: boolean;
 }
+
+// Function generates suffix for date as Javascript Date Object does not provide one on Locale String
 
 const getSuffix = (date: number) => {
   const suffix = ['st', 'nd', 'rd']
@@ -46,6 +56,9 @@ const getSuffix = (date: number) => {
 
 const App: FC = () => {
   // PART 2: Implement the current date and time
+
+  //Multiple 3rd party packages could have been used such as Luxon.js, Moment.js, date-fs, etc. would likely have accellerated the process and in hindsight I likely will not use Javascript date again even if the assignment appears simple. 
+
   const getCurrentDate = () => {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -59,7 +72,8 @@ const App: FC = () => {
     };
   };
 
-  
+  // Time must be split into array for iteration using the Clock Component
+  // Again a more modern package like Luxon.js or date-fs would likely have been much more efficient at this step.
   
   const getTimeArr = () => {
     let time = new Date().toLocaleTimeString()
@@ -83,6 +97,8 @@ const App: FC = () => {
     finalarr.push(arr3[1])
     return finalarr
   }
+
+  // Time array created on state creation and state update
   
   const [timeArray, settimeArray] = useState(getTimeArr())
 
@@ -118,11 +134,16 @@ const App: FC = () => {
     });
   }
 
+  // Stock updater called from UseEffect Block
+  // Due to Api call limitations I hard coded the three tickers although a more dynamic approach would be more scalable and likely efficient.
+
   const getStockData = () => {
     stockNames.forEach((stock) => {
       fetchStocksFromApi(stock)
     })
   }
+
+  // Stock Tickers Defaulted in case of failed Api Calls
     
   const [aapl, setaapl] = useState({symbol: 'AAPL', price: 0, hasPriceRDropped: false})
   const [msft, setmsft] = useState({symbol: 'MSFT', price: 0, hasPriceRDropped: false})
@@ -132,6 +153,8 @@ const App: FC = () => {
     shortForecast: string;
     temperature: number;
   }
+
+  // Weather pulled minutely from US Weather Api, good Enough for simple projects but not as expansive as some apis
   
   const fetchWeatherFromApi = () => {
     fetch(
@@ -142,15 +165,16 @@ const App: FC = () => {
         shortForecast: data.properties.periods[0].shortForecast, temperature: data.properties.periods[0].temperature
       }
       setweather(object)
+    }).catch(err => {
+      console.error(err)
     })
   }
 
+  // Weather defaulted in case failed api fetch call
 
   const [weather, setweather] = useState({shortForecast: 'sunny', temperature: 0})
 
-
   const [dateinfo, setdateinfo] = useState(getCurrentDate())
-  // const [stockinfo, setstockinfo] = useState(getStockArray())
 
   // PART 4: Update the state of the page every minute
   useEffect(() => {
@@ -164,6 +188,8 @@ const App: FC = () => {
     }, 60000)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Weather Icons supplied by React Icons, Returned based on Api shortDescription
 
   const weatherIcon = (weather: string) => {
       if (weather === 'Haze') {
